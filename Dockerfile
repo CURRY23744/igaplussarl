@@ -1,12 +1,9 @@
-FROM php:8.2-apache
+FROM php:8.2-fpm
 
 # Install extensions
 RUN apt-get update && apt-get install -y \
-    libzip-dev zip unzip curl libpng-dev libonig-dev libxml2-dev libsqlite3-dev \
+    libzip-dev zip unzip curl libpng-dev libonig-dev libxml2-dev libsqlite3-dev nginx \
     && docker-php-ext-install pdo pdo_mysql pdo_sqlite mbstring zip exif pcntl bcmath
-
-# Désactiver les MPM en conflit et activer le bon
-RUN a2dismod mpm_event mpm_worker 2>/dev/null; a2enmod mpm_prefork
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -21,7 +18,17 @@ RUN touch /tmp/temp.db && composer install --no-dev --optimize-autoloader --no-s
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
-RUN a2enmod rewrite
+# Config nginx
+RUN echo 'server { \
+    listen 80; \
+    root /var/www/html/public; \
+    index index.php; \
+    location / { try_files $uri $uri/ /index.php?$query_string; } \
+    location ~ \.php$ { fastcgi_pass 127.0.0.1:9000; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; include fastcgi_params; } \
+}' > /etc/nginx/sites-available/default
+
+COPY --chown=root:root docker-start.sh /start.sh
+RUN chmod +x /start.sh
 
 EXPOSE 80
+CMD ["/start.sh"]
