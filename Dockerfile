@@ -19,12 +19,16 @@ RUN touch /tmp/temp.db && composer install --no-dev --optimize-autoloader --no-s
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Config nginx
-RUN echo 'server { \
-    listen 80; \
-    root /var/www/html/public; \
-    index index.php; \
-    location / { try_files $uri $uri/ /index.php?$query_string; } \
-    location ~ \.php$ { fastcgi_pass 127.0.0.1:9000; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; include fastcgi_params; } \
+RUN echo 'server { \n\
+    listen 80; \n\
+    root /var/www/html/public; \n\
+    index index.php index.html; \n\
+    location / { try_files $uri $uri/ /index.php?$query_string; } \n\
+    location ~ \\.php$ { \n\
+        fastcgi_pass 127.0.0.1:9000; \n\
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; \n\
+        include fastcgi_params; \n\
+    } \n\
 }' > /etc/nginx/sites-available/default
 
 COPY --chown=root:root docker-start.sh /start.sh
