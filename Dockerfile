@@ -19,14 +19,13 @@ RUN touch /tmp/temp.db && composer install --no-dev --optimize-autoloader --no-s
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Config nginx (On écoute sur la variable d'environnement PORT)
-# Config nginx
 RUN echo 'server { \n\
     listen 80; \n\
     root /var/www/html/public; \n\
     index index.php index.html; \n\
     location / { try_files $uri $uri/ /index.php?$query_string; } \n\
     location ~ \\.php$ { \n\
-        fastcgi_pass 127.0.0.1:9000; \n\
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock; \n\
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; \n\
         include fastcgi_params; \n\
     } \n\
