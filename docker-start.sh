@@ -1,10 +1,7 @@
 #!/bin/sh
-
-# On remplace 80 par le port dynamique de Railway
-sed -i "s/listen 80;/listen ${PORT};/g" /etc/nginx/sites-available/default
-
-# On lance PHP-FPM (il va écouter sur le 9000 en interne)
 php-fpm -D
-
-# On lance Nginx (il va écouter sur le $PORT et envoyer le PHP au 9000)
+# Attendre que le socket soit prêt
+while [ ! -S /var/run/php/php8.2-fpm.sock ]; do
+    sleep 1
+done
 nginx -g "daemon off;"
