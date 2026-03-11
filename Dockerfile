@@ -14,7 +14,9 @@ WORKDIR /var/www/html
 # Copy project
 COPY . .
 
-# Install dependencies
+# Install dependencies (sans connexion DB)
+ENV DB_CONNECTION=sqlite
+ENV DB_DATABASE=/tmp/temp.db
 RUN composer install --no-dev --optimize-autoloader
 
 # Permissions
