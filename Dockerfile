@@ -5,6 +5,9 @@ RUN apt-get update && apt-get install -y \
     libzip-dev zip unzip curl libpng-dev libonig-dev libxml2-dev libsqlite3-dev \
     && docker-php-ext-install pdo pdo_mysql pdo_sqlite mbstring zip exif pcntl bcmath
 
+# Désactiver les MPM en conflit et activer le bon
+RUN a2dismod mpm_event mpm_worker 2>/dev/null; a2enmod mpm_prefork
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
