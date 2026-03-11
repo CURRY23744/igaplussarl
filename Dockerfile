@@ -14,7 +14,7 @@ COPY . .
 
 ENV DB_CONNECTION=sqlite
 ENV DB_DATABASE=/tmp/temp.db
-RUN touch /tmp/temp.db && composer install --no-dev --optimize-autoloader
+RUN touch /tmp/temp.db && composer install --no-dev --optimize-autoloader --no-scripts
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
