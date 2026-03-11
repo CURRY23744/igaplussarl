@@ -19,8 +19,9 @@ RUN touch /tmp/temp.db && composer install --no-dev --optimize-autoloader --no-s
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Config nginx (On écoute sur la variable d'environnement PORT)
+# Config nginx
 RUN echo 'server { \n\
-    listen ${PORT}; \n\
+    listen 80; \n\
     root /var/www/html/public; \n\
     index index.php index.html; \n\
     location / { try_files $uri $uri/ /index.php?$query_string; } \n\

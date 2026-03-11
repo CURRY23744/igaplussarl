@@ -1,10 +1,10 @@
 #!/bin/sh
 
-# Remplace ${PORT} dans la config Nginx par la vraie valeur fournie par Railway
-sed -i "s/\${PORT}/${PORT}/g" /etc/nginx/sites-available/default
+# On remplace 80 par le port dynamique de Railway
+sed -i "s/listen 80;/listen ${PORT};/g" /etc/nginx/sites-available/default
 
-# Lancer PHP-FPM en arrière-plan
+# On lance PHP-FPM (il va écouter sur le 9000 en interne)
 php-fpm -D
 
-# Lancer Nginx au premier plan
+# On lance Nginx (il va écouter sur le $PORT et envoyer le PHP au 9000)
 nginx -g "daemon off;"
