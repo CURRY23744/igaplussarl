@@ -549,14 +549,14 @@
             <p class="cta-left-sub">Confiez-nous la réalisation de votre bien immobilier de rêve</p>
         </div>
         <div class="cta-right">
-            <a href="https://wa.me/22890713335" target="_blank" class="cta-num-block">
+            <a href="https://wa.me/22898801414" target="_blank" class="cta-num-block">
                 <span class="cta-num-label">Ligne 1</span>
-                <span class="cta-num-val"><i class="fab fa-whatsapp"></i> +228 90 71 33 35</span>
+                <span class="cta-num-val"><i class="fab fa-whatsapp"></i> +228 98 80 14 14</span>
                 <span class="cta-num-arrow"><i class="fas fa-arrow-right"></i></span>
             </a>
-            <a href="https://wa.me/22892028989" target="_blank" class="cta-num-block">
+            <a href="https://wa.me/22898801414" target="_blank" class="cta-num-block">
                 <span class="cta-num-label">Ligne 2</span>
-                <span class="cta-num-val"><i class="fab fa-whatsapp"></i> +228 92 02 89 89</span>
+                <span class="cta-num-val"><i class="fab fa-whatsapp"></i> +228 98 80 14 14</span>
                 <span class="cta-num-arrow"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>

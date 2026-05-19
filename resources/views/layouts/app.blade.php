@@ -341,8 +341,8 @@
                 <div class="contact-item">
                     <i class="fas fa-phone-alt"></i>
                     <div>
-                        <div>+228 90 71 33 35</div>
                         <div>+228 92 02 89 89</div>
+                        <div>+228 98 80 14 14</div>
                     </div>
                 </div>
                 <div class="contact-item">
