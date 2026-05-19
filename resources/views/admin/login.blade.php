@@ -147,6 +147,11 @@
         color: #b91c1c; padding: 12px; border-radius: 8px;
         font-size: 0.8rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
     }
+    .alert-success-custom {
+        background: #ecfdf5; border: 1px solid #a7f3d0;
+        color: #0f766e; padding: 12px; border-radius: 8px;
+        font-size: 0.8rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+    }
 </style>
 
 <div class="bg-grid"></div>
@@ -165,6 +170,13 @@
             <div class="alert-custom">
                 <i class="fas fa-circle-exclamation"></i>
                 {{ session('error') }}
+            </div>
+        @endif
+
+        @if(session('success'))
+            <div class="alert-success-custom">
+                <i class="fas fa-circle-check"></i>
+                {{ session('success') }}
             </div>
         @endif
 

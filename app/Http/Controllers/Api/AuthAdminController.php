@@ -77,7 +77,13 @@ public function resetPassword(Request $request)
         ->first();
 
     if (!$admin) {
-        return response()->json(['message' => 'Token invalide ou expiré'], 400);
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Token invalide ou expiré'], 400);
+        }
+
+        return back()
+            ->withInput($request->except('password', 'password_confirmation'))
+            ->with('error', 'Token invalide ou expiré. Veuillez demander un nouveau lien de réinitialisation.');
     }
 
     $admin->update([
@@ -86,10 +92,16 @@ public function resetPassword(Request $request)
         'password_reset_expires' => null,
     ]);
 
-    return response()->json([
-        'message' => 'Mot de passe réinitialisé avec succès'
-    ], 200);
+    if ($request->expectsJson()) {
+        return response()->json([
+            'message' => 'Mot de passe réinitialisé avec succès'
+        ], 200);
+    }
+
+    return redirect()->route('admin.login')
+        ->with('success', 'Mot de passe réinitialisé avec succès. Vous pouvez maintenant vous connecter.');
 }
+
 public function loginWeb(Request $request)
 {
     $admin = \App\Models\Admin::where('email', $request->email)->first();
