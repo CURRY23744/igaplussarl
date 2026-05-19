@@ -395,18 +395,6 @@
 
             <div class="contact-items">
 
-                @if($apropos->whatsapp)
-                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $apropos->whatsapp) }}"
-                   target="_blank" class="contact-item">
-                    <div class="contact-item-icon" style="background:rgba(37,211,102,0.1);color:#25d366;">
-                        <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <div>
-                        <div class="contact-item-label">WhatsApp</div>
-                        <div class="contact-item-val">{{ $apropos->whatsapp }}</div>
-                    </div>
-                </a>
-                @endif
 
                 @if($apropos->email)
                 <a href="mailto:{{ $apropos->email }}" class="contact-item">
@@ -554,9 +542,9 @@
                 <span class="cta-num-val"><i class="fab fa-whatsapp"></i> +228 98 80 14 14</span>
                 <span class="cta-num-arrow"><i class="fas fa-arrow-right"></i></span>
             </a>
-            <a href="https://wa.me/22898801414" target="_blank" class="cta-num-block">
+            <a href="https://wa.me/22892028989" target="_blank" class="cta-num-block">
                 <span class="cta-num-label">Ligne 2</span>
-                <span class="cta-num-val"><i class="fab fa-whatsapp"></i> +228 98 80 14 14</span>
+                <span class="cta-num-val"><i class="fab fa-whatsapp"></i> +228 92 02 89 89</span>
                 <span class="cta-num-arrow"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
